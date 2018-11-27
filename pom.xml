@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example</groupId>
+  <artifactId>wsbp</artifactId>
+  <packaging>war</packaging>
+
+  <name>wicket_spring-boot_practice</name>
+  <description>Practical project for Wicket with Spring-Boot</description>
+
+  <!-- Wicket-Spring-Bootの親ファイルを読み込む -->
+  <parent>
+    <groupId>com.giffing.wicket.spring.boot.starter</groupId>
+    <artifactId>wicket-spring-boot-starter-parent</artifactId>
+    <version>2.1.5</version>
+    <relativePath/>
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>11</java.version>
+    <maven.build.timestamp.format>20181211</maven.build.timestamp.format>
+  </properties>
+
+  <dependencies>
+    <!-- Wicket-Spring-Bootを使う -->
+    <dependency>
+      <groupId>com.giffing.wicket.spring.boot.starter</groupId>
+      <artifactId>wicket-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.wicketstuff</groupId>
+      <artifactId>wicketstuff-annotation</artifactId>
+    </dependency>
+
+    <!-- データベースの接続にSpring-JDBCを使う -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+    </dependency>
+    <!-- データベース（H2DB）を使う-->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+
+    <!-- Spring-Bootの開発用ツールを使う -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Spring-Bootのテスト用ツールを使う -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- ビルド後に生成されるファイルの名前を設定する -->
+    <finalName>${project.artifactId}-${maven.build.timestamp}</finalName>
+    <plugins>
+      <!-- Spring-Bootプロジェクトを、executable-warとしてビルドする -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <executable>true</executable>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <!-- ビルドの際に、htmlファイルをクラスフォルダに含める -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**</include>
+        </includes>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+  </build>
+
+
+</project>
