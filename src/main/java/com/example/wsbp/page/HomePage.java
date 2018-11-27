@@ -31,6 +31,10 @@ public class HomePage extends WebPage {
     var timeModel = Model.of(service.makeCurrentHMS());
     var timeLabel = new Label("time", timeModel);
     add(timeLabel);
+
+    var randModel = Model.of(service.makeRandInt());
+    var randLabel = new Label("rand", randModel);
+    add(randLabel);
   }
 
 }
