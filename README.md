@@ -30,7 +30,7 @@
 ### 動作確認
 
 1. [WebPageを表示する](doc/B01/01.md)
-1. [WebPageに表示するものをSpringで作る](doc/B03/01.md)
+1. [WebPageに表示するものをSpringで作る](doc/B02/01.md)
 1. [WebPage間を移動する](doc/B03/01.md)
 
 ### ユーザ追加
