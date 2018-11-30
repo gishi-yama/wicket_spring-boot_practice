@@ -4,6 +4,7 @@ import com.example.wsbp.service.ISampleService;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -35,6 +36,9 @@ public class HomePage extends WebPage {
     var randModel = Model.of(service.makeRandInt());
     var randLabel = new Label("rand", randModel);
     add(randLabel);
+
+    var toUserMakerLink = new BookmarkablePageLink<Void>("toUserMaker", UserMakerPage.class);
+    add(toUserMakerLink);
   }
 
 }
