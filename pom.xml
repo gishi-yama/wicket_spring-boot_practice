@@ -45,13 +45,14 @@
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
+      <scope>runtime</scope>
     </dependency>
 
     <!-- Spring-Bootの開発用ツールを使う -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
-      <scope>provided</scope>
+      <scope>runtime</scope>
     </dependency>
 
     <!-- Spring-Bootのテスト用ツールを使う -->
