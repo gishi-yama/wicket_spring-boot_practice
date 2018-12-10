@@ -22,10 +22,11 @@
 
 ## 目次
 
-### フレームワークの説明
+### フレームワークの説明と開発の準備
 
 1. [Apache Wicket](doc/A01/01.md)
-2. SpringとSpring Boot
+1. [SpringとSpring Boot](doc/A02/01.md)
+1. 開発の準備
 
 ### 動作確認
 
