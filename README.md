@@ -8,7 +8,7 @@
 
 ## 動作確認環境
 
-- Oracle JDK 8
+- Oracle JDK 8 (1.8.0_192)
 - Wicket-Spring-Boot 2.1.5
     - Wicket 8
     - Spring Boot 2
