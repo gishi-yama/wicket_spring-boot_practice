@@ -22,7 +22,7 @@
 
 ## 目次
 
-### フレームワークの説明と練習のの準備
+### フレームワークの説明と練習の準備
 
 1. [Apache Wicket](doc/A01/01.md)
 1. [SpringとSpring Boot](doc/A02/01.md)
