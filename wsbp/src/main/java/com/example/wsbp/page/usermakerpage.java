@@ -23,11 +23,14 @@ public class UserMakerPage extends WebPage {
     Form<Void> userInfoForm = new Form<Void>("userInfo") {
       @Override
       protected void onSubmit() {
+        String userName = userNameModel.getObject();
+        String userPass = userPassModel.getObject();
         String msg = "送信データ："
-          + userNameModel.getObject()
+          + userName
           + ","
-          + userPassModel.getObject();
+          + userPass;
         System.out.println(msg);
+        setResponsePage(new UserMakerCompPage(userNameModel));
       }
     };
     add(userInfoForm);
