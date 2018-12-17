@@ -31,7 +31,7 @@ public class UserMakerPage extends WebPage {
           + userPass;
         System.out.println(msg);
         setResponsePage(new UserMakerCompPage(userNameModel));
-      }
+      }g
     };
     add(userInfoForm);
 
