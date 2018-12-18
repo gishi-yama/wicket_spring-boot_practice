@@ -37,9 +37,10 @@
 
     <!-- データベースの接続にSpring-JDBCを使う -->
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
+
     <!-- データベース（H2DB）を使う-->
     <dependency>
       <groupId>com.h2database</groupId>
