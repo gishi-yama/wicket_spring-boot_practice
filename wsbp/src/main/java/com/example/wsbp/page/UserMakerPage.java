@@ -11,9 +11,9 @@ import org.apache.wicket.model.Model;
 import org.wicketstuff.annotation.mount.MountPath;
 
 @MountPath("UserMaker")
-public class UserMakerPage2 extends WebPage {
+public class UserMakerPage extends WebPage {
 
-  public UserMakerPage2() {
+  public UserMakerPage() {
     IModel<String> userNameModel = Model.of("");
     IModel<String> userPassModel = Model.of("");
 
