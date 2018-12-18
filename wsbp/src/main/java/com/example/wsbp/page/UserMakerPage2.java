@@ -11,9 +11,9 @@ import org.apache.wicket.model.Model;
 import org.wicketstuff.annotation.mount.MountPath;
 
 @MountPath("UserMaker")
-public class UserMakerPage extends WebPage {
+public class UserMakerPage2 extends WebPage {
 
-  public UserMakerPage() {
+  public UserMakerPage2() {
     IModel<String> userNameModel = Model.of("");
     IModel<String> userPassModel = Model.of("");
 
@@ -31,7 +31,7 @@ public class UserMakerPage extends WebPage {
           + userPass;
         System.out.println(msg);
         setResponsePage(new UserMakerCompPage(userNameModel));
-      }g
+      }
     };
     add(userInfoForm);
 

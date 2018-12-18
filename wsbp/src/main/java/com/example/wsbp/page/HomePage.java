@@ -39,7 +39,7 @@ public class HomePage extends WebPage {
     Label randLabel = new Label("rand", randModel);
     add(randLabel);
 
-    Link<Void> toUserMakerLink = new BookmarkablePageLink<>("toUserMaker", UserMakerPage.class);
+    Link<Void> toUserMakerLink = new BookmarkablePageLink<>("toUserMaker", UserMakerPage2.class);
     add(toUserMakerLink);
   }
 
