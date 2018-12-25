@@ -7,7 +7,6 @@ import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -48,8 +47,7 @@ public class UserMakerPage extends WebPage {
       protected void onInitialize() {
         super.onInitialize();
         // 文字列の長さを8〜32文字に制限するバリデータ
-        StringValidator validator = StringValidator.lengthBetween(8, 32);
-        add(validator);
+        add(StringValidator.lengthBetween(8, 32));
       }
     };
 
@@ -60,8 +58,7 @@ public class UserMakerPage extends WebPage {
       protected void onInitialize() {
         super.onInitialize();
         // 文字列の長さを8〜32文字に制限するバリデータ
-//        StringValidator validator = StringValidator.lengthBetween(8, 32);
-//        add(validator);
+        add(StringValidator.lengthBetween(8, 32));
       }
     };
     userInfoForm.add(userPassField);
