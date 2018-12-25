@@ -3,6 +3,10 @@
 <body>
 <h1>ユーザを作成する</h1>
 <form action="#" wicket:id="userInfo">
+  <!-- 独自のバリデーションを表示する -->
+  <wicket:enclosure child="fbMsg">
+    <div wicket:id="fbMsg">バリデーションの有無と理由</div>
+  </wicket:enclosure>
   <div>ユーザー名：<input type="text" wicket:id="userName"/></div>
   <div>パスワード：<input type="password" wicket:id="userPass"/></div>
   <div>

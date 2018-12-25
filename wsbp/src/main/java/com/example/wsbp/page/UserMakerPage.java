@@ -7,11 +7,16 @@ import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.lang.Args;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.wicketstuff.annotation.mount.MountPath;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @MountPath("UserMaker")
 public class UserMakerPage extends WebPage {
@@ -36,11 +41,22 @@ public class UserMakerPage extends WebPage {
           + ","
           + userPass;
         System.out.println(msg);
+
+        Pattern p = Pattern.compile("^[0-9]*$");
+        Matcher m = p.matcher(userPass);
+        if(m.find()) {
+          error("数字だけのパスワードはダメ");
+          return;
+        }
+
         userService.registerUser(userName, userPass);
         setResponsePage(new UserMakerCompPage(userNameModel));
       }
     };
     add(userInfoForm);
+
+    FeedbackPanel fbMsgPanel = new FeedbackPanel("fbMsg");
+    userInfoForm.add(fbMsgPanel);
 
     TextField<String> userNameField = new TextField<String>("userName", userNameModel) {
       @Override
