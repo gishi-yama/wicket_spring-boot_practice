@@ -7,9 +7,11 @@ import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.validation.validator.StringValidator;
 import org.wicketstuff.annotation.mount.MountPath;
 
 @MountPath("UserMaker")
@@ -41,10 +43,27 @@ public class UserMakerPage extends WebPage {
     };
     add(userInfoForm);
 
-    TextField<String> userNameField = new TextField<>("userName", userNameModel);
+    TextField<String> userNameField = new TextField<String>("userName", userNameModel) {
+      @Override
+      protected void onInitialize() {
+        super.onInitialize();
+        // 文字列の長さを8〜32文字に制限するバリデータ
+        StringValidator validator = StringValidator.lengthBetween(8, 32);
+        add(validator);
+      }
+    };
+
     userInfoForm.add(userNameField);
 
-    PasswordTextField userPassField = new PasswordTextField("userPass", userPassModel);
+    PasswordTextField userPassField = new PasswordTextField("userPass", userPassModel) {
+      @Override
+      protected void onInitialize() {
+        super.onInitialize();
+        // 文字列の長さを8〜32文字に制限するバリデータ
+//        StringValidator validator = StringValidator.lengthBetween(8, 32);
+//        add(validator);
+      }
+    };
     userInfoForm.add(userPassField);
   }
 
