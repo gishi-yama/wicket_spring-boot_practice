@@ -4,6 +4,11 @@
 <h1>認証後</h1>
 <p>あなたは<span wicket:id="userName">userName</span>さんです。</p>
 
+<h2>このシステムに登録されているユーザ一・パスワード一覧</h2>
+<ol>
+  <li wicket:id="users"><span wicket:id="userName"></span>, <span wicket:id="userPass"></span></li>
+</ol>
+
 <!-- 以下を追加 -->
 <div><a wicket:id="signout">サインアウト</a></div>
 </body>
