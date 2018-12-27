@@ -43,8 +43,11 @@ public class SignedPage extends WebPage {
     };
     add(signoutLink);
 
+    // Service からデータベースのユーザ一覧をもらい、Modelにする
+    // List型のモデルは Model.ofList(...) で作成する。
     IModel<List<AuthUser>> authUsersModel = Model.ofList(userService.findAuthUsers());
 
+    // List型のモデルを表示する ListView
     ListView<AuthUser> usersLV = new ListView<AuthUser>("users", authUsersModel) {
       @Override
       protected void populateItem(ListItem<AuthUser> listItem) {

@@ -38,7 +38,7 @@ public class AuthUserRepository implements IAuthUserRepository {
     // 検索用のSQLを実行する方法。検索結果をList（可変長配列）で返す。
     // データの追加時と若干異なるので注意。
     List<Boolean> booleans = jdbc.query(sql,
-      new SingleColumnRowMapper(Boolean.class),
+      new SingleColumnRowMapper<>(Boolean.class),
       new Object[]{userName, userPass});
 
     // Listにデータがある(＝trueの要素ものがある)：照合成功

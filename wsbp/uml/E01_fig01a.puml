@@ -1,0 +1,22 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam classFontSize 24
+skinparam classFontName BIZ-UDPGothic-B
+skinparam classAttributeFontSize 24
+skinparam classAttributeFontName BIZ-UDPGothic-B
+skinparam shadowing false
+skinparam arrowFontSize 24
+skinparam arrowFontName BIZ-UDPGothic-B
+hide circle
+
+class AuthUser {
+- userName : 文字列
+- userPass : 文字列
+----
+フィールドを使ったメソッド
+...
+}
+
+
+@enduml
