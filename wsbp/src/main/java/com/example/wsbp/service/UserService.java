@@ -20,4 +20,10 @@ public class UserService implements IUserService {
     System.out.println("記録行数：" + n);
   }
 
+  @Override
+  public boolean existsUser(String userName, String userPass) {
+    boolean result = authUserRepos.exists(userName, userPass);
+    System.out.println(userName + ", " + userPass + " のユーザ照合結果：" + result);
+    return result;
+  }
 }
