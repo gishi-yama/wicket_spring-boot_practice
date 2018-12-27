@@ -13,7 +13,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 public class SignedPage extends WebPage {
   public SignedPage() {
     IModel<String> name = Model.of("test");
-    Label userIdLabel = new Label("userId", name);
-    add(userIdLabel);
+    Label userNameLabel = new Label("userName", name);
+    add(userNameLabel);
   }
 }

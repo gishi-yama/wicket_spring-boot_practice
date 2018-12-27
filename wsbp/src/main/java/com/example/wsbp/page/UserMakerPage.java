@@ -11,7 +11,6 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.apache.wicket.util.lang.Args;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -44,7 +43,7 @@ public class UserMakerPage extends WebPage {
 
         Pattern p = Pattern.compile("^[0-9]*$");
         Matcher m = p.matcher(userPass);
-        if(m.find()) {
+        if (m.find()) {
           error("数字だけのパスワードはダメ");
           return;
         }
