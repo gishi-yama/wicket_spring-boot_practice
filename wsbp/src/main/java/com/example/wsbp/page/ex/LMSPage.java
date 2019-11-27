@@ -18,7 +18,6 @@ import java.util.Objects;
 public class LMSPage extends ModelVariationPage {
 
   private IModel<List<Chat>> chatListModel;
-  private Chat chat;
 
   public LMSPage() {
     this(null);
@@ -32,17 +31,35 @@ public class LMSPage extends ModelVariationPage {
       chatListModel = Model.ofList(new ArrayList<>());
     }
 
-    IModel<String> headerModel = LambdaModel.of(() -> "LambdaModel(1)");
+    // ページインスタンスのクラス名を取得する処理を、Modelの戻り値にする
+    IModel<String> headerModel = LambdaModel.of(getClass()::getSimpleName);
     add(new Label("header", headerModel));
 
-    chat = new Chat();
-    Form<Void> newChatForm = new Form<Void>("newChat") {
+
+    Chat chat = new Chat();
+
+    // Chat を Model に渡す
+    IModel<Chat> chatModel = Model.of(chat);
+
+    // Form の onSubmit() で getModelObject を使えるようにするために、 chatModel を渡す
+    Form<Chat> newChatForm = new Form<Chat>("newChat", chatModel) {
       @Override
       protected void onSubmit() {
         super.onSubmit();
-        chat.print();
-        chatListModel.getObject().add(chat);
-        setResponsePage(new LMSPage(chatListModel));
+        // 送信ボタン押下後のModelの中身
+        // （つまり、フィールドにデータがsetされたchatインスタンス）
+        Chat updatedChat = getModelObject();
+        updatedChat.print();
+
+        // 次ページに渡すための ChatList を作る
+        List<Chat> nextChatList = chatListModel.getObject();
+        nextChatList.add(updatedChat);
+
+        // 次ページに渡すModelを準備
+        IModel<List<Chat>> nextPageModel = Model.ofList(nextChatList);
+
+        // 次ページにModelを渡して遷移
+        setResponsePage(new CPMSPage(nextPageModel));
       }
     };
     add(newChatForm);

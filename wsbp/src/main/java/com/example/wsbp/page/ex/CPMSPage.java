@@ -19,7 +19,6 @@ import java.util.Objects;
 public class CPMSPage extends ModelVariationPage {
 
   private IModel<List<Chat>> chatListModel;
-  private IModel<Chat> chatModel;
 
   public CPMSPage() {
     this(null);
@@ -33,21 +32,43 @@ public class CPMSPage extends ModelVariationPage {
       chatListModel = Model.ofList(new ArrayList<>());
     }
 
-    IModel<String> headerModel = LambdaModel.of(() -> "LambdaModel(1)");
+    // ページインスタンスのクラス名を取得する処理を、Modelの戻り値にする
+    IModel<String> headerModel = LambdaModel.of(getClass()::getSimpleName);
     add(new Label("header", headerModel));
 
-    chatModel = CompoundPropertyModel.of(new Chat());
+    Chat chat = new Chat();
+
+    // Chat を CompoundPropertyModel に渡す
+    IModel<Chat> chatModel = CompoundPropertyModel.of(chat);
+
+
+    // Form の onSubmit() で getModelObject を使えるようにするために、 chatModel を渡す
+    // また、CompoundPropertyModelの能力で、Formの子どものModelは自動的に設定される
     Form<Chat> newChatForm = new Form<Chat>("newChat", chatModel) {
       @Override
       protected void onSubmit() {
         super.onSubmit();
-        getModelObject().print();
-        chatListModel.getObject().add(getModelObject());
-        setResponsePage(new CPMSPage(chatListModel));
+        // 送信ボタン押下後のModelの中身
+        // （つまり、フィールドにデータがsetされたchatインスタンス）
+        Chat updatedChat = getModelObject();
+        updatedChat.print();
+
+        // 次ページに渡すための ChatList を作る
+        List<Chat> nextChatList = chatListModel.getObject();
+        nextChatList.add(updatedChat);
+
+        // 次ページに渡すModelを準備
+        IModel<List<Chat>> nextPageModel = Model.ofList(nextChatList);
+
+        // 次ページにModelを渡して遷移
+        setResponsePage(new CPMSPage(nextPageModel));
       }
     };
     add(newChatForm);
 
+    // Form に CompoundPropertyModel が渡されているので、
+    // 子となる userName, msgBody は、上のChatインスタンスのフィールド変数の中で
+    // 同じ名前のものを自動的にデータの set/get 先にする
     newChatForm.add(new TextField<>("userName"));
     newChatForm.add(new TextField<>("msgBody"));
 
