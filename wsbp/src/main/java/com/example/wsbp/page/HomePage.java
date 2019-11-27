@@ -19,27 +19,27 @@ public class HomePage extends WebPage {
   private ISampleService service;
 
   public HomePage() {
-    IModel<String> youModel = Model.of("Wicket-Spring-Boot");
-    Label youLabel = new Label("you", youModel);
+    var youModel = Model.of("Wicket-Spring-Boot");
+    var youLabel = new Label("you", youModel);
     add(youLabel);
 
-    IModel<String> gakusekiModel = Model.of("b1970010");
-    Label gakusekiLabel = new Label("gakuseki", gakusekiModel);
+    var gakusekiModel = Model.of("b1970010");
+    var gakusekiLabel = new Label("gakuseki", gakusekiModel);
     add(gakusekiLabel);
 
-    IModel<String> nameModel = Model.of("千歳 光");
+    var nameModel = Model.of("千歳 光");
     Label nameLabel = new Label("name", nameModel);
     add(nameLabel);
 
-    IModel<String> timeModel = Model.of(service.makeCurrentHMS());
+    var timeModel = Model.of(service.makeCurrentHMS());
     Label timeLabel = new Label("time", timeModel);
     add(timeLabel);
 
-    IModel<Integer> randModel = Model.of(service.makeRandInt());
+    var randModel = Model.of(service.makeRandInt());
     Label randLabel = new Label("rand", randModel);
     add(randLabel);
 
-    Link<Void> toUserMakerLink = new BookmarkablePageLink<>("toUserMaker", UserMakerPage.class);
+    var toUserMakerLink = new BookmarkablePageLink<>("toUserMaker", UserMakerPage.class);
     add(toUserMakerLink);
   }
 

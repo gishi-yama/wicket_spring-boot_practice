@@ -32,31 +32,31 @@ public class LMSPage extends ModelVariationPage {
     }
 
     // ページインスタンスのクラス名を取得する処理を、Modelの戻り値にする
-    IModel<String> headerModel = LambdaModel.of(getClass()::getSimpleName);
+    var headerModel = LambdaModel.of(getClass()::getSimpleName);
     add(new Label("header", headerModel));
 
 
-    Chat chat = new Chat();
+    var chat = new Chat();
 
     // Chat を Model に渡す
-    IModel<Chat> chatModel = Model.of(chat);
+    var chatModel = Model.of(chat);
 
     // Form の onSubmit() で getModelObject を使えるようにするために、 chatModel を渡す
-    Form<Chat> newChatForm = new Form<Chat>("newChat", chatModel) {
+    var newChatForm = new Form<>("newChat", chatModel) {
       @Override
       protected void onSubmit() {
         super.onSubmit();
         // 送信ボタン押下後のModelの中身
         // （つまり、フィールドにデータがsetされたchatインスタンス）
-        Chat updatedChat = getModelObject();
+        var updatedChat = getModelObject();
         updatedChat.print();
 
         // 次ページに渡すための ChatList を作る
-        List<Chat> nextChatList = chatListModel.getObject();
+        var nextChatList = chatListModel.getObject();
         nextChatList.add(updatedChat);
 
         // 次ページに渡すModelを準備
-        IModel<List<Chat>> nextPageModel = Model.ofList(nextChatList);
+        var nextPageModel = Model.ofList(nextChatList);
 
         // 次ページにModelを渡して遷移
         setResponsePage(new CPMSPage(nextPageModel));
@@ -64,20 +64,20 @@ public class LMSPage extends ModelVariationPage {
     };
     add(newChatForm);
 
-    IModel<String> userNameModel = LambdaModel.of(chat::getUserName, chat::setUserName);
+    var userNameModel = LambdaModel.of(chat::getUserName, chat::setUserName);
     newChatForm.add(new TextField<>("userName", userNameModel));
 
-    IModel<String> msgBodyModel = LambdaModel.of(chat::getMsgBody, chat::setMsgBody);
+    var msgBodyModel = LambdaModel.of(chat::getMsgBody, chat::setMsgBody);
     newChatForm.add(new TextField<>("msgBody", msgBodyModel));
 
-    IModel<Integer> msgNumModel = LambdaModel.of(chatListModel.getObject()::size);
+    var msgNumModel = LambdaModel.of(chatListModel.getObject()::size);
     add(new Label("chatNum", msgNumModel));
 
-    ListView<Chat> msgListLV = new ListView<Chat>("chatList", chatListModel) {
+    var msgListLV = new ListView<>("chatList", chatListModel) {
 
       @Override
       protected void populateItem(ListItem<Chat> listItem) {
-        Chat itemChat = listItem.getModelObject();
+        var itemChat = listItem.getModelObject();
         // いちいちmodel型の変数にするのがもうめんどい
         listItem.add(new Label("userName", LambdaModel.of(itemChat::getUserName)));
         listItem.add(new Label("msgBody", LambdaModel.of(itemChat::getMsgBody)));

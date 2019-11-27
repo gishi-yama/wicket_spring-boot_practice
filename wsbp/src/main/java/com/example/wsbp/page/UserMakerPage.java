@@ -24,13 +24,13 @@ public class UserMakerPage extends WebPage {
   private IUserService userService;
 
   public UserMakerPage() {
-    IModel<String> userNameModel = Model.of("");
-    IModel<String> userPassModel = Model.of("");
+    var userNameModel = Model.of("");
+    var userPassModel = Model.of("");
 
-    Link<Void> toHomeLink = new BookmarkablePageLink<>("toHome", HomePage.class);
+    var toHomeLink = new BookmarkablePageLink<>("toHome", HomePage.class);
     add(toHomeLink);
 
-    Form<Void> userInfoForm = new Form<Void>("userInfo") {
+    var userInfoForm = new Form<>("userInfo") {
       @Override
       protected void onSubmit() {
         String userName = userNameModel.getObject();
@@ -54,10 +54,10 @@ public class UserMakerPage extends WebPage {
     };
     add(userInfoForm);
 
-    FeedbackPanel fbMsgPanel = new FeedbackPanel("fbMsg");
+    var fbMsgPanel = new FeedbackPanel("fbMsg");
     userInfoForm.add(fbMsgPanel);
 
-    TextField<String> userNameField = new TextField<String>("userName", userNameModel) {
+    var userNameField = new TextField<>("userName", userNameModel) {
       @Override
       protected void onInitialize() {
         super.onInitialize();
@@ -68,7 +68,7 @@ public class UserMakerPage extends WebPage {
 
     userInfoForm.add(userNameField);
 
-    PasswordTextField userPassField = new PasswordTextField("userPass", userPassModel) {
+    var userPassField = new PasswordTextField("userPass", userPassModel) {
       @Override
       protected void onInitialize() {
         super.onInitialize();

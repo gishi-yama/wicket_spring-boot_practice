@@ -22,14 +22,14 @@ public class SignPage extends WebPage {
   private IUserService service;
 
   public SignPage() {
-    IModel<String> userNameModel = Model.of("");
-    IModel<String> userPassModel = Model.of("");
+    var userNameModel = Model.of("");
+    var userPassModel = Model.of("");
 
-    Form<Void> userInfoForm = new Form<Void>("userInfo") {
+    Form<Void> userInfoForm = new Form<>("userInfo") {
       @Override
       protected void onSubmit() {
-        String userName = userNameModel.getObject();
-        String userPass = userPassModel.getObject();
+        var userName = userNameModel.getObject();
+        var userPass = userPassModel.getObject();
         // b1992490...の定数で照合していたものを、DB経由に変更
         if (service.existsUser(userName, userPass)) {
           MySession.get().sign(userName);
@@ -39,7 +39,7 @@ public class SignPage extends WebPage {
     };
     add(userInfoForm);
 
-    TextField<String> userNameField = new TextField<String>("userName", userNameModel) {
+    var userNameField = new TextField<>("userName", userNameModel) {
       @Override
       protected void onInitialize() {
         super.onInitialize();
@@ -50,7 +50,7 @@ public class SignPage extends WebPage {
 
     userInfoForm.add(userNameField);
 
-    PasswordTextField userPassField = new PasswordTextField("userPass", userPassModel) {
+    var userPassField = new PasswordTextField("userPass", userPassModel) {
       @Override
       protected void onInitialize() {
         super.onInitialize();
