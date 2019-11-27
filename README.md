@@ -8,17 +8,16 @@
 
 ## 動作確認環境
 
-- Oracle JDK 8 (1.8.0_192)
-- Wicket-Spring-Boot 2.1.5
+- AdoptOpenJDK ((build 11.0.5+10)
+- Wicket-Spring-Boot 2.1.7
     - Wicket 8
-    - Spring Boot 2
-    - Spring 5
+    - Spring Boot 2.1
     - H2DB（PostgreSQL互換モード）
     - 他
-- macOS 10.13
-- IntelliJ IDEA 2018.2
+- macOS 10.14
+- IntelliJ IDEA 2019
 
-※ 学内開発ではPostgreSQLをデータベースに使うことが多いが、環境設定の簡単さを重視してH2DBのPostgreSQLモードを使う。
+※ 学内開発ではPostgreSQLをデータベースに使うことが多いが、この講習では環境設定の簡単さを重視してH2DBのPostgreSQLモードを使う。
 
 ## 目次
 
@@ -78,6 +77,6 @@
 
 1. [独自のバリデーション](doc/Ex01/01.md)
 
-1. [Modelを使い分ける](doc/Ex02/02.md)
+1. Modelを使い分ける
 
 1. コンポーネントを今風に使う
