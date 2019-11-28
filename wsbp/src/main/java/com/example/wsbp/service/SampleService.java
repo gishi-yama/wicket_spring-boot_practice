@@ -10,8 +10,8 @@ public class SampleService implements ISampleService {
 
   @Override
   public String makeCurrentHMS() {
-    LocalDateTime now = LocalDateTime.now();
-    String str = now.getHour()
+    var now = LocalDateTime.now();
+    var str = now.getHour()
       + ":" + now.getMinute()
       + ":" + now.getSecond();
     return str;
@@ -19,8 +19,8 @@ public class SampleService implements ISampleService {
 
   @Override
   public int makeRandInt() {
-    Random rand = new Random();
-    int n = rand.nextInt(10);
+    var rand = new Random();
+    var n = rand.nextInt(10);
     return n;
   }
 }

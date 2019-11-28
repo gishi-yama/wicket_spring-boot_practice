@@ -33,18 +33,18 @@ public class CPMSPage extends ModelVariationPage {
     }
 
     // ページインスタンスのクラス名を取得する処理を、Modelの戻り値にする
-    IModel<String> headerModel = LambdaModel.of(getClass()::getSimpleName);
+    var headerModel = LambdaModel.of(getClass()::getSimpleName);
     add(new Label("header", headerModel));
 
-    Chat chat = new Chat();
+    var chat = new Chat();
 
     // Chat を CompoundPropertyModel に渡す
-    IModel<Chat> chatModel = CompoundPropertyModel.of(chat);
+    var chatModel = CompoundPropertyModel.of(chat);
 
 
     // Form の onSubmit() で getModelObject を使えるようにするために、 chatModel を渡す
     // また、CompoundPropertyModelの能力で、Formの子どものModelは自動的に設定される
-    Form<Chat> newChatForm = new Form<Chat>("newChat", chatModel) {
+    var newChatForm = new Form<>("newChat", chatModel) {
       @Override
       protected void onSubmit() {
         super.onSubmit();
@@ -73,10 +73,10 @@ public class CPMSPage extends ModelVariationPage {
     newChatForm.add(new TextField<>("msgBody"));
 
     // メソッドを毎回使うようなものは LambdaModelのままがよい
-    IModel<Integer> msgNumModel = LambdaModel.of(chatListModel.getObject()::size);
+    var msgNumModel = LambdaModel.of(chatListModel.getObject()::size);
     add(new Label("chatNum", msgNumModel));
 
-    ListView<Chat> msgListLV = new ListView<Chat>("chatList", chatListModel) {
+    var msgListLV = new ListView<>("chatList", chatListModel) {
 
       @Override
       protected void populateItem(ListItem<Chat> listItem) {

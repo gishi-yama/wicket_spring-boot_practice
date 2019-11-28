@@ -19,20 +19,20 @@ public class UserService implements IUserService {
 
   @Override
   public void registerUser(String userName, String userPass) {
-    int n = authUserRepos.insert(userName, userPass);
+    var n = authUserRepos.insert(userName, userPass);
     System.out.println("記録行数：" + n);
   }
 
   @Override
   public boolean existsUser(String userName, String userPass) {
-    boolean result = authUserRepos.exists(userName, userPass);
+    var result = authUserRepos.exists(userName, userPass);
     System.out.println(userName + ", " + userPass + " のユーザ照合結果：" + result);
     return result;
   }
 
   @Override
   public List<AuthUser> findAuthUsers() {
-    List<AuthUser> users = authUserRepos.find();
+    var users = authUserRepos.find();
     System.out.println("データ件数：" + users.size());
     return users;
   }

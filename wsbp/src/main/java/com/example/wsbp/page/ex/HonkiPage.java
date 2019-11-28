@@ -32,7 +32,7 @@ public class HonkiPage extends ModelVariationPage {
 
     add(new Label("header", LambdaModel.of(getClass()::getSimpleName)));
 
-    Form<Chat> newChatForm = new Form<Chat>("newChat", CompoundPropertyModel.of(new Chat())) {
+    var newChatForm = new Form<>("newChat", CompoundPropertyModel.of(new Chat())) {
       @Override
       protected void onSubmit() {
         super.onSubmit();
@@ -49,7 +49,7 @@ public class HonkiPage extends ModelVariationPage {
     add(new Label("chatNum", LambdaModel.of(chatListModel.getObject()::size)));
 
     // CompoundPropertyModelが自動的に準備されるListView
-    ListView<Chat> msgListLV = new PropertyListView<Chat>("chatList", chatListModel) {
+    var msgListLV = new PropertyListView<>("chatList", chatListModel) {
 
       @Override
       protected void populateItem(ListItem<Chat> listItem) {
