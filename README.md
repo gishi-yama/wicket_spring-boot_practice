@@ -8,7 +8,7 @@
 
 ## 動作確認環境
 
-- AdoptOpenJDK ((build 11.0.5+10)
+- AdoptOpenJDK (build 11.0.5+10)
 - Wicket-Spring-Boot 2.1.7
     - Wicket 8
     - Spring Boot 2.1
