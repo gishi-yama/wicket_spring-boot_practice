@@ -8,7 +8,6 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -25,7 +24,7 @@ public class SignPage extends WebPage {
     var userNameModel = Model.of("");
     var userPassModel = Model.of("");
 
-    Form<Void> userInfoForm = new Form<>("userInfo") {
+    var userInfoForm = new Form<>("userInfo") {
       @Override
       protected void onSubmit() {
         var userName = userNameModel.getObject();
