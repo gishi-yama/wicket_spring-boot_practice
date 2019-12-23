@@ -11,12 +11,9 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
-
-import java.util.List;
 
 @AuthorizeInstantiation(Roles.USER)
 @MountPath("Signed")
@@ -26,12 +23,12 @@ public class SignedPage extends WebPage {
   private IUserService userService;
 
   public SignedPage() {
-    String signedUserName = MySession.get().getUserName();
-    IModel<String> name = Model.of(signedUserName);
-    Label userNameLabel = new Label("userName", name);
+    var signedUserName = MySession.get().getUserName();
+    var name = Model.of(signedUserName);
+    var userNameLabel = new Label("userName", name);
     add(userNameLabel);
 
-    Link<Void> signoutLink = new Link<Void>("signout") {
+    var signoutLink = new Link<Void>("signout") {
 
       @Override
       public void onClick() {
@@ -45,25 +42,25 @@ public class SignedPage extends WebPage {
 
     // Service からデータベースのユーザ一覧をもらい、Modelにする
     // List型のモデルは Model.ofList(...) で作成する。
-    IModel<List<AuthUser>> authUsersModel = Model.ofList(userService.findAuthUsers());
+    var authUsersModel = Model.ofList(userService.findAuthUsers());
 
     // List型のモデルを表示する ListView
-    ListView<AuthUser> usersLV = new ListView<AuthUser>("users", authUsersModel) {
+    var usersLV = new ListView<>("users", authUsersModel) {
       @Override
       protected void populateItem(ListItem<AuthUser> listItem) {
-        IModel<AuthUser> itemModel = listItem.getModel();
-        AuthUser authUser = itemModel.getObject();
+        var itemModel = listItem.getModel();
+        var authUser = itemModel.getObject();
 
-        IModel<String> userNameModel = Model.of(authUser.getUserName());
-        Label userNameLabel = new Label("userName", userNameModel);
+        var userNameModel = Model.of(authUser.getUserName());
+        var userNameLabel = new Label("userName", userNameModel);
         listItem.add(userNameLabel);
 
-        IModel<String> userPassModel = Model.of(authUser.getUserPass());
-        Label userPassLabel = new Label("userPass", userPassModel);
+        var userPassModel = Model.of(authUser.getUserPass());
+        var userPassLabel = new Label("userPass", userPassModel);
         listItem.add(userPassLabel);
       }
     };
     add(usersLV);
-
   }
+
 }
