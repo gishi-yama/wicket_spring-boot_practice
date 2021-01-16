@@ -7,7 +7,7 @@
     <groupId>com.giffing.wicket.spring.boot.starter</groupId>
     <artifactId>wicket-spring-boot-starter-parent</artifactId>
     <version>2.1.9</version>
-    <relativePath>pom-parent/spring-boot-23.xml</relativePath>
+    <relativePath>pom-parent/spring-boot-24.xml</relativePath>
   </parent>
   <groupId>com.example</groupId>
   <artifactId>wsbp</artifactId>
