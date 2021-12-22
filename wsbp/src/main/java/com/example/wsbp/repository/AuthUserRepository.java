@@ -3,6 +3,7 @@ package com.example.wsbp.repository;
 import com.example.wsbp.data.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.stereotype.Repository;
@@ -38,8 +39,8 @@ public class AuthUserRepository implements IAuthUserRepository {
     // 検索用のSQLを実行する方法。検索結果をList（可変長配列）で返す。
     // データの追加時と若干異なるので注意。
     var booleans = jdbc.query(sql,
-      new SingleColumnRowMapper<>(Boolean.class),
-      new Object[]{userName, userPass});
+      SingleColumnRowMapper.newInstance(Boolean.class),
+      userName, userPass);
 
     // Listにデータがある(＝trueの要素ものがある)：照合成功
     // Listにデータがない(要素が何もない)：照合失敗
@@ -55,8 +56,7 @@ public class AuthUserRepository implements IAuthUserRepository {
     // 取り出したいデータの型によって、第2引数の RowMapper を切り替える。
     // ? を使うSQLであれば、第3引数の Object型配列 の要素に順番に設定する。
     var users = jdbc.query(sql,
-      new BeanPropertyRowMapper<>(AuthUser.class),
-      new Object[]{});
+      DataClassRowMapper.newInstance(AuthUser.class));
 
     // 取り出したデータ（Listの要素）をそのまま返値とする。
     return users;
