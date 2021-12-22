@@ -31,11 +31,11 @@ public class HonkiPage extends ModelVariationPage {
 
     add(new Label("header", LambdaModel.of(getClass()::getSimpleName)));
 
-    var newChatForm = new Form<>("newChat", CompoundPropertyModel.of(new Chat())) {
+    var newChatForm = new Form<>("newChat", CompoundPropertyModel.of(new Chat("",""))) {
       @Override
       protected void onSubmit() {
         super.onSubmit();
-        getModelObject().print();
+        System.out.println(getModelObject().toString());
         chatListModel.getObject().add(getModelObject());
         setResponsePage(new HonkiPage(Model.ofList(chatListModel.getObject())));
       }

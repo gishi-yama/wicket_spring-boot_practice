@@ -36,7 +36,7 @@ public class CPMSPage extends ModelVariationPage {
     var headerModel = LambdaModel.of(getClass()::getSimpleName);
     add(new Label("header", headerModel));
 
-    var chat = new Chat();
+    var chat = new Chat("", "");
 
     // Chat を CompoundPropertyModel に渡す
     var chatModel = CompoundPropertyModel.of(chat);
@@ -51,7 +51,7 @@ public class CPMSPage extends ModelVariationPage {
         // 送信ボタン押下後のModelの中身
         // （つまり、フィールドにデータがsetされたchatインスタンス）
         Chat updatedChat = getModelObject();
-        updatedChat.print();
+        System.out.println(updatedChat.toString());
 
         // 次ページに渡すための ChatList を作る
         List<Chat> nextChatList = chatListModel.getObject();
