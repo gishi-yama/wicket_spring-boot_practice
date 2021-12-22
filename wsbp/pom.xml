@@ -16,7 +16,7 @@
   <description>Practical project for Wicket with Spring-Boot</description>
 
   <properties>
-    <java.version>11</java.version>
+    <java.version>17</java.version>
     <!-- プロジェクトでは基本的にUTF-8を使う -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
