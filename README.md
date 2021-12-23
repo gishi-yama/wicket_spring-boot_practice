@@ -9,11 +9,11 @@
 ## 動作確認環境
 
 - Java 17 or 11
-- Wicket-Spring-Boot 3.1.6
+- [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 3.1.6
     - Wicket 9
     - Spring Boot 2.6
-    - H2DB（PostgreSQL互換モード）
-    - 他
+- H2DB（PostgreSQL互換モード）
+- 他
 - macOS 10.15
 - IntelliJ IDEA 2021
 
