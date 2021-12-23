@@ -11,6 +11,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -42,7 +43,10 @@ public class SignedPage extends WebPage {
 
     // Service からデータベースのユーザ一覧をもらい、Modelにする
     // List型のモデルは Model.ofList(...) で作成する。
+    // なお、DBや外部のWEB-APIなどのデータを取得する場合、通常はLoadableDetachableModelを利用する
+    // 参考：https://ci.apache.org/projects/wicket/guide/9.x/single.html#_detachable_models
     var authUsersModel = Model.ofList(userService.findAuthUsers());
+//    var authUsersModel = LoadableDetachableModel.of(() -> userService.findAuthUsers());
 
     // List型のモデルを表示する ListView
     var usersLV = new ListView<>("users", authUsersModel) {
