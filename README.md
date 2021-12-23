@@ -81,7 +81,7 @@
       - [参考：Wicket models and forms](https://ci.apache.org/projects/wicket/guide/9.x/single.html#_wicket_models_and_forms)
       - [さらに綺麗にかくとこんな感じ](wsbp/src/main/java/com/example/wsbp/page/ex/HonkiPage.java)（ソースコードのみ）
    2. DBや外部（WEB-APIなど）からデータを取得する時にはLoadableDetachableModelを意識する
-      - コード例[SignedPage.java#L46-L49](wsbp/src/main/java/com/example/wsbp/page/signed/SignedPage.java#L46-L49)
+      - コード例：[SignedPage.java#L46-L49](wsbp/src/main/java/com/example/wsbp/page/signed/SignedPage.java#L46-L49)
       - [参考：Detachable models](https://ci.apache.org/projects/wicket/guide/9.x/single.html#_detachable_models)
 3. コンポーネントを今風に使う
     - [折角なので Apache Wicket 8 についてまとめておきたい（2016-12-23時点）](https://qiita.com/gishi_yama/items/59fae7f2a56df31c5749)
