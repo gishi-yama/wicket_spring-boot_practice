@@ -8,14 +8,14 @@
 
 ## 動作確認環境
 
-- AdoptOpenJDK (build 11.0.5+10)
-- Wicket-Spring-Boot 2.1.7
-    - Wicket 8
-    - Spring Boot 2.1
-    - H2DB（PostgreSQL互換モード）
-    - 他
-- macOS 10.14
-- IntelliJ IDEA 2019
+- Java 17 or 11
+- [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 3.1.6
+    - Wicket 9
+    - Spring Boot 2.6
+- H2DB（PostgreSQL互換モード）
+- 他
+- macOS 10.15
+- IntelliJ IDEA 2021
 
 ※ 学内開発ではPostgreSQLをデータベースに使うことが多いが、この講習では環境設定の簡単さを重視してH2DBのPostgreSQLモードを使う。
 
@@ -76,8 +76,14 @@
 ### おまけ
 
 1. [独自のバリデーション](doc/Ex01/01.md)
-1. Modelを使い分ける
-1. コンポーネントを今風に使う
+2. Modelを使い分ける
+   1. [LambdaModel, CompoundPropertyModelを使った例](wsbp/src/main/java/com/example/wsbp/page/ex/CPMSPage.java)（ソースコードのみ）
+      - [参考：Wicket models and forms](https://ci.apache.org/projects/wicket/guide/9.x/single.html#_wicket_models_and_forms)
+      - [さらに綺麗にかくとこんな感じ](wsbp/src/main/java/com/example/wsbp/page/ex/HonkiPage.java)（ソースコードのみ）
+   2. DBや外部（WEB-APIなど）からデータを取得する時にはLoadableDetachableModelを意識する
+      - コード例：[SignedPage.java#L46-L49](wsbp/src/main/java/com/example/wsbp/page/signed/SignedPage.java#L46-L49)
+      - [参考：Detachable models](https://ci.apache.org/projects/wicket/guide/9.x/single.html#_detachable_models)
+3. コンポーネントを今風に使う
     - [折角なので Apache Wicket 8 についてまとめておきたい（2016-12-23時点）](https://qiita.com/gishi_yama/items/59fae7f2a56df31c5749)
     - [Apache Wicket 8 の代表的な変更点は結局どうなったか（2018-06-26時点）](https://qiita.com/gishi_yama/items/d392088b4c57950fcbb4)
-1. [うまくWicketを使うために](doc/Ex04/01.md)
+4. [うまくWicketを使うために](doc/Ex04/01.md)

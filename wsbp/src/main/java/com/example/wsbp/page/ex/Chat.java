@@ -4,31 +4,41 @@ import java.io.Serializable;
 
 public class Chat implements Serializable {
 
-  private String userName;
-  private String msgBody;
+  private final String userName;
+  private final String msgBody;
 
-  public Chat() {
-    this.userName = "";
-    this.msgBody = "";
+  public Chat(String userName, String msgBody) {
+    this.userName = userName;
+    this.msgBody = msgBody;
   }
 
   public String getUserName() {
     return userName;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
   public String getMsgBody() {
     return msgBody;
   }
 
-  public void setMsgBody(String msgBody) {
-    this.msgBody = msgBody;
-  }
-
   public void print() {
     System.out.println(userName + "," + msgBody);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Chat chat = (Chat) o;
+
+    if (!userName.equals(chat.userName)) return false;
+    return msgBody.equals(chat.msgBody);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = userName.hashCode();
+    result = 31 * result + msgBody.hashCode();
+    return result;
   }
 }

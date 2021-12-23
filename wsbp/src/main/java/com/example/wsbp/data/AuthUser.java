@@ -6,12 +6,12 @@ import java.io.Serializable;
 // Wicketの Model に使うかもしれないクラスは、 implements Serializable をつける
 public class AuthUser implements Serializable {
 
-  private String userName;  // auth_userテーブルのuser_name列のデータ
-  private String userPass;  // auth_userテーブルのuser_pass列のデータ
+  private final String userName;  // auth_userテーブルのuser_name列のデータ
+  private final String userPass;  // auth_userテーブルのuser_pass列のデータ
 
-  public AuthUser() {
-    userName = "";
-    userPass = "";
+  public AuthUser(String userName, String userPass) {
+    this.userName = userName;
+    this.userPass = userPass;
   }
 
   public String getUserName() {
@@ -22,11 +22,21 @@ public class AuthUser implements Serializable {
     return userPass;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    AuthUser authUser = (AuthUser) o;
+
+    if (!userName.equals(authUser.userName)) return false;
+    return userPass.equals(authUser.userPass);
   }
 
-  public void setUserPass(String userPass) {
-    this.userPass = userPass;
+  @Override
+  public int hashCode() {
+    int result = userName.hashCode();
+    result = 31 * result + userPass.hashCode();
+    return result;
   }
 }
