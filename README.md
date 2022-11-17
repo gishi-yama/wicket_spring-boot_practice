@@ -8,14 +8,14 @@
 
 ## 動作確認環境
 
-- Java 17 or 11
+- Java 17
 - [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 3.1.6
     - Wicket 9
     - Spring Boot 2.6
 - H2DB（PostgreSQL互換モード）
 - 他
-- macOS 10.15
-- IntelliJ IDEA 2021
+- macOS 12.6
+- IntelliJ IDEA 2022
 
 ※ 学内開発ではPostgreSQLをデータベースに使うことが多いが、この講習では環境設定の簡単さを重視してH2DBのPostgreSQLモードを使う。
 
