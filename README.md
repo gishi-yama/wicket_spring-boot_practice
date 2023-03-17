@@ -9,9 +9,9 @@
 ## 動作確認環境
 
 - Java 17
-- [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 3.1.6
+- [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 3.1.7
     - Wicket 9
-    - Spring Boot 2.6
+    - Spring Boot 2.7
 - H2DB（PostgreSQL互換モード）
 - 他
 - macOS 12.6
