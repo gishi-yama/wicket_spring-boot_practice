@@ -8,19 +8,19 @@
 
 ## 動作確認環境
 
-- Java 17
-- [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 3.1.7
-  - Wicket 9
-  - Spring Boot 2.7
+- Java 21
+- [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 4.0.0
+    - Wicket 10
+    - Spring Boot 3.1
+>>>>>>> 914c747 (update readme)
 - H2DB（PostgreSQL互換モード）
 - 他
-- macOS 12.6
-- IntelliJ IDEA 2022
+- macOS 12.7
+- IntelliJ IDEA 2023
 
 **注意事項**
 
 - 学内開発ではPostgreSQLをデータベースに使うことが多いが、この講習では環境設定の簡単さを重視してH2DBのPostgreSQLモードを使う。
-- Spring Boot 2 は、2023年11月でOSSサポートのEOLを迎える。したがって、このプロジェクトを下敷きにしてサービスを公開する場合は、Spring Boot 3への移行を検討すること。
 
 ## 目次
 
