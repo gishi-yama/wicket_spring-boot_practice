@@ -12,7 +12,6 @@
 - [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 4.0.0
     - Wicket 10
     - Spring Boot 3.1
->>>>>>> 914c747 (update readme)
 - H2DB（PostgreSQL互換モード）
 - 他
 - macOS 12.7
