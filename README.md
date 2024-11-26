@@ -11,11 +11,11 @@
 - Java 21
 - [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 4.0.0
   - Wicket 10
-  - Spring Boot 3.2
+  - Spring Boot 3.3
 - H2DB（PostgreSQL互換モード）
 - 他
-- macOS 12.7
-- IntelliJ IDEA 2023
+- macOS 15
+- IntelliJ IDEA 2024.3
 
 **注意事項**
 
