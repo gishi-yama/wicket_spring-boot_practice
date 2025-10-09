@@ -9,7 +9,7 @@
 ## 動作確認環境
 
 - Java 21
-- [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 4.0.0
+- [Wicket-Spring-Boot](https://github.com/MarcGiffing/wicket-spring-boot) 4.1
   - Wicket 10
   - Spring Boot 3.5
 - H2DB（PostgreSQL互換モード）
