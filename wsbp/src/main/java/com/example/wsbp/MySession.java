@@ -3,9 +3,18 @@ package com.example.wsbp;
 import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
+import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
 import org.apache.wicket.request.Request;
+import org.apache.wicket.request.cycle.RequestCycle;
 
+import java.util.List;
 import java.util.Objects;
+
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
 // ブラウザ事に異なる情報を一時保存できるセッション
 public class MySession extends AbstractAuthenticatedWebSession {
@@ -24,6 +33,19 @@ public class MySession extends AbstractAuthenticatedWebSession {
     // セキュリティ上の配慮から、セッションを切り替える（古いセッションを使い回さない）
     replaceSession();
     this.userName = userName;
+    var authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    var authentication =
+        new UsernamePasswordAuthenticationToken(userName, null, authorities);
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    var requestCycle = RequestCycle.get();
+    if (requestCycle != null) {
+      var request = requestCycle.getRequest();
+      if (request instanceof ServletWebRequest servletWebRequest) {
+        var httpSession = servletWebRequest.getContainerRequest().getSession(true);
+        httpSession.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+            SecurityContextHolder.getContext());
+      }
+    }
   }
 
   @Override
@@ -41,7 +63,14 @@ public class MySession extends AbstractAuthenticatedWebSession {
   public boolean isSignedIn() {
     // 認証結果OK(userName = ユーザー名)だった場合は、trueを返す
     // 認証結果NG(userName = null）だった場合は、falseを返す
-    return Objects.nonNull(this.userName);
+    var authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (Objects.isNull(authentication) || !authentication.isAuthenticated()
+        || authentication instanceof AnonymousAuthenticationToken) {
+      // Spring Security にまだ認証情報が乗っていない場合は、従来通りセッションの値を参照する
+      return Objects.nonNull(this.userName);
+    }
+    this.userName = authentication.getName();
+    return true;
   }
 
   public String getUserName() {

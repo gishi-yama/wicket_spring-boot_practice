@@ -8,9 +8,11 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
+import org.springframework.core.env.Environment;
 import org.wicketstuff.annotation.mount.MountPath;
 
 @WicketSignInPage
@@ -19,6 +21,9 @@ public class SignPage extends WebPage {
 
   @SpringBean
   private IUserService service;
+
+  @SpringBean
+  private Environment environment;
 
   public SignPage() {
     var userNameModel = Model.of("");
@@ -37,6 +42,18 @@ public class SignPage extends WebPage {
       }
     };
     add(userInfoForm);
+
+    var azureLoginLink = new ExternalLink("azureLoginLink", "/oauth2/authorization/azure") {
+      @Override
+      protected void onConfigure() {
+        super.onConfigure();
+        var azureEnabled =
+            environment.getProperty("spring.cloud.azure.active-directory.enabled", Boolean.class,
+                false);
+        setVisible(Boolean.TRUE.equals(azureEnabled));
+      }
+    };
+    add(azureLoginLink);
 
     var userNameField = new TextField<>("userName", userNameModel) {
       @Override

@@ -2,7 +2,6 @@ package com.example.wsbp.page.signed;
 
 import com.example.wsbp.MySession;
 import com.example.wsbp.data.AuthUser;
-import com.example.wsbp.page.SignPage;
 import com.example.wsbp.service.IUserService;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
@@ -14,6 +13,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.markup.html.pages.RedirectPage;
 import org.wicketstuff.annotation.mount.MountPath;
 
 @AuthorizeInstantiation(Roles.USER)
@@ -33,10 +33,7 @@ public class SignedPage extends WebPage {
 
       @Override
       public void onClick() {
-        // セッションの破棄
-        MySession.get().invalidate();
-        // SignPageへ移動
-        setResponsePage(SignPage.class);
+        setResponsePage(new RedirectPage("/logout"));
       }
     };
     add(signoutLink);
