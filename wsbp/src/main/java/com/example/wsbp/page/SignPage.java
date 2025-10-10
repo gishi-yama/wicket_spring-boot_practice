@@ -43,13 +43,13 @@ public class SignPage extends WebPage {
     };
     add(userInfoForm);
 
+    // Azure AD でのログインへ誘導するリンク（有効化設定があるときだけ表示）
     var azureLoginLink = new ExternalLink("azureLoginLink", "/oauth2/authorization/azure") {
       @Override
       protected void onConfigure() {
         super.onConfigure();
         var azureEnabled =
-            environment.getProperty("spring.cloud.azure.active-directory.enabled", Boolean.class,
-                false);
+            environment.getProperty("azure.ad.enabled", Boolean.class, false);
         setVisible(Boolean.TRUE.equals(azureEnabled));
       }
     };

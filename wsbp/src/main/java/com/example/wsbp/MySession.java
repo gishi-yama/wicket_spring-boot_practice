@@ -37,6 +37,7 @@ public class MySession extends AbstractAuthenticatedWebSession {
     var authentication =
         new UsernamePasswordAuthenticationToken(userName, null, authorities);
     SecurityContextHolder.getContext().setAuthentication(authentication);
+    // Spring Security と Wicket のセッションを同期させる（DB ログインでも Azure ログインと同じ扱いにする）
     var requestCycle = RequestCycle.get();
     if (requestCycle != null) {
       var request = requestCycle.getRequest();
@@ -67,6 +68,7 @@ public class MySession extends AbstractAuthenticatedWebSession {
     if (Objects.isNull(authentication) || !authentication.isAuthenticated()
         || authentication instanceof AnonymousAuthenticationToken) {
       // Spring Security にまだ認証情報が乗っていない場合は、従来通りセッションの値を参照する
+      // （DB ログインした直後などを想定）
       return Objects.nonNull(this.userName);
     }
     this.userName = authentication.getName();

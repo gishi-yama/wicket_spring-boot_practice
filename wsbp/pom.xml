@@ -41,14 +41,6 @@
       <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
 
-    <!-- 学内の認証に接続するためにspring-security, oauth2sを使う -->
-    <!-- Azure AD認証用 -->
-    <dependency>
-      <groupId>com.azure.spring</groupId>
-      <artifactId>spring-cloud-azure-starter-active-directory</artifactId>
-      <version>6.0.0</version>
-    </dependency>
-
     <!-- OAuth2とJWT処理用 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -81,6 +73,7 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
   <build>

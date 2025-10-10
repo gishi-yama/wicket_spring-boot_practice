@@ -7,6 +7,18 @@
 <!-- 以下を追加 -->
 <div><a wicket:id="signout">サインアウト</a></div>
 
+<!-- Azure AD でログインした時だけ表示される情報 -->
+<div wicket:id="azureContainer">
+  <h2>Azure AD サインイン情報</h2>
+  <p>ログインユーザ: <span wicket:id="azureSource"></span></p>
+  <dl>
+    <div wicket:id="azureAttributes">
+      <dt><span wicket:id="attributeKey"></span></dt>
+      <dd><span wicket:id="attributeValue"></span></dd>
+    </div>
+  </dl>
+</div>
+
 <h2>このシステムに登録されているユーザ一・パスワード一覧</h2>
 <ol>
   <li wicket:id="users">
