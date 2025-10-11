@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -26,7 +29,15 @@ public class SecurityConfig {
   };
 
   @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+  public SecurityFilterChain securityFilterChain(HttpSecurity http,
+      ClientRegistrationRepository clientRegistrationRepository) throws Exception {
+    // Azure AD のログイン画面で都度アカウント選択をさせるため、authorization request をカスタマイズする
+    var authorizationRequestResolver = new DefaultOAuth2AuthorizationRequestResolver(
+        clientRegistrationRepository,
+        OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI);
+    authorizationRequestResolver.setAuthorizationRequestCustomizer(customizer ->
+        customizer.additionalParameters(params -> params.put("prompt", "select_account")));
+
     http
         .authorizeHttpRequests(auth -> auth
             // 上記以外は必ず認証させる
@@ -36,6 +47,9 @@ public class SecurityConfig {
         .oauth2Login(oauth -> oauth
             // Azure AD によるログインも Sign ページをエントリポイントにする
             .loginPage("/Sign")
+            // クエリパラメータ prompt=select_account を付与してアカウント選択を促す
+            .authorizationEndpoint(endpoint ->
+                endpoint.authorizationRequestResolver(authorizationRequestResolver))
             .defaultSuccessUrl("/Signed")
         )
         .logout(logout -> logout
