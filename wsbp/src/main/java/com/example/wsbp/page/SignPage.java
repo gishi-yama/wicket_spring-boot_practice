@@ -10,10 +10,17 @@ import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.model.Model;
+
+import com.example.wsbp.UserName;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.Authentication;
 import org.wicketstuff.annotation.mount.MountPath;
+
+import java.util.Objects;
+import java.util.function.Predicate;
 
 @WicketSignInPage
 @MountPath("Sign")
@@ -36,7 +43,8 @@ public class SignPage extends WebPage {
         var userPass = userPassModel.getObject();
         // b1992490...の定数で照合していたものを、DB経由に変更
         if (service.existsUser(userName, userPass)) {
-          MySession.get().sign(userName);
+          // 値オブジェクトへ変換し、異常状態を明示的に排除する
+          MySession.get().sign(UserName.of(userName));
         }
         setResponsePage(new SignedPage());
       }
@@ -45,12 +53,14 @@ public class SignPage extends WebPage {
 
     // Azure AD でのログインへ誘導するリンク（有効化設定があるときだけ表示）
     var azureLoginLink = new ExternalLink("azureLoginLink", "/oauth2/authorization/azure") {
+      private static final Predicate<Boolean> AZURE_ADがON = Boolean.TRUE::equals;
+
       @Override
       protected void onConfigure() {
         super.onConfigure();
         var azureEnabled =
             environment.getProperty("azure.ad.enabled", Boolean.class, false);
-        setVisible(Boolean.TRUE.equals(azureEnabled));
+        setVisible(AZURE_ADがON.test(azureEnabled));
       }
     };
     add(azureLoginLink);

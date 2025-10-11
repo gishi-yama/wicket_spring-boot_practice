@@ -33,7 +33,7 @@ public class SignedPage extends WebPage {
 
   public SignedPage() {
     var signedUserName = MySession.get().getUserName();
-    var name = Model.of(signedUserName);
+    var name = Model.of(signedUserName.toDisplayString());
     var userNameLabel = new Label("userName", name);
     add(userNameLabel);
 
