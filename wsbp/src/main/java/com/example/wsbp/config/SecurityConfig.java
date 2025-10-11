@@ -14,6 +14,7 @@ public class SecurityConfig {
   // 認証無しでアクセスできるパスの一覧（Wicket のリソースや静的ファイルなども含める）
   private static final String[] PUBLIC_ENDPOINTS = {
       "/",
+      "/Home", // ルート以外から HomePage へアクセスする場合も認証不要にする
       "/Sign",
       "/webjars/**",
       "/css/**",
